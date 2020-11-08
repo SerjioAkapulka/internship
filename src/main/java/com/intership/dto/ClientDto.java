@@ -1,19 +1,18 @@
-package models;
+package com.intership.dto;
 
+import com.intership.models.Client;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
-public class Client {
+public class ClientDto {
+    private UUID id;
     private String firstName;
     private String lastName;
-    private int balance;
-    private final UUID id;
+    private Integer balance;
 
-    public Client(UUID id,String firstName, String lastName, int balance) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.balance = balance;
-
+    public ClientDto() {
     }
 
     public String getFirstName() {
@@ -32,11 +31,19 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public int getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

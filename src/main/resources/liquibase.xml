@@ -1,0 +1,53 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="s. vagin" id="create-tables">
+        <sql>
+            CREATE TABLE client
+            (
+            id               UUID                    PRIMARY KEY,
+            first_name       VARCHAR                 NOT NULL,
+            last_name        VARCHAR                 NOT NULL,
+            balance          INTEGER                 NOT NULL
+            );
+
+            CREATE TABLE contract
+            (
+            id      UUID                    PRIMARY KEY,
+            client_id       UUID                    NOT NULL,
+            status           VARCHAR                 NOT NULL,
+            FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE
+            );
+
+            CREATE TABLE internet
+            (
+            client_id       UUID                             NOT NULL,
+            internet_title            VARCHAR                 NOT NULL,
+            internet_cost             INTEGER                 NOT NULL,
+            FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE
+            );
+            CREATE TABLE mobile
+            (
+            client_id       UUID                        NOT NULL,
+            title            VARCHAR                 NOT NULL,
+            cost             INTEGER                 NOT NULL,
+            FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE
+            );
+            CREATE TABLE penalty
+            (
+            client_id       UUID                        NOT NULL,
+            title            VARCHAR                 NOT NULL,
+            cost             INTEGER                 NOT NULL,
+            FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE
+            );
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
