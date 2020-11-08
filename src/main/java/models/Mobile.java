@@ -1,10 +1,9 @@
-package Models;
+package models;
 
 import java.util.UUID;
 
-public interface Payments {
+public class Mobile implements Payments{
     UUID clientId = null;
     String title = null;
     int cost = 0;
-
 }
