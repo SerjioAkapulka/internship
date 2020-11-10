@@ -1,7 +1,6 @@
 package com.intership.repositories;
 
 import com.intership.models.Client;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

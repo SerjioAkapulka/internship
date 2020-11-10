@@ -1,13 +1,12 @@
 package com.intership.controllers;
 
 import com.intership.dto.ContractDto;
-import com.intership.models.Client;
 import com.intership.models.Contract;
 import com.intership.services.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+
 import java.util.UUID;
 
 @RestController

@@ -1,9 +1,6 @@
 package com.intership.repositories;
 
-import com.intership.models.Contract;
 import com.intership.models.Internet;
-import org.springframework.stereotype.Repository;
-
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,4 +29,5 @@ public class InternetRepositoryImpl {
         Internet internet = getInternet(id);
         internetRepository.delete(internet);
     }
+
 }

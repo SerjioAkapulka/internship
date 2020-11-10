@@ -1,6 +1,5 @@
 package com.intership.repositories;
 
-import com.intership.models.Client;
 import com.intership.models.Contract;
 import org.springframework.stereotype.Repository;
 

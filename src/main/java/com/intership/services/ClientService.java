@@ -5,8 +5,6 @@ import com.intership.models.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.intership.repositories.ClientRepositoryImpl;
-
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

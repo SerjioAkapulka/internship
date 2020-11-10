@@ -2,6 +2,7 @@ package com.intership.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import java.util.UUID;
 @Entity
 public class Mobile {
@@ -13,6 +14,23 @@ public class Mobile {
 
     public UUID getId() {
         return id;
+    }
+
+    public Mobile() {
+
+    }
+    @PrePersist
+    public void generateUUID() {
+        if(this.id == null) {
+            this.id = UUID.randomUUID();
+        }
+    }
+
+    public Mobile(UUID id, UUID clientId, String title, int cost) {
+        this.id = id;
+        this.clientId = clientId;
+        this.title = title;
+        this.cost = cost;
     }
 
     public void setId(UUID id) {

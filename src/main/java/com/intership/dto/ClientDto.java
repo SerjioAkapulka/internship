@@ -1,9 +1,5 @@
 package com.intership.dto;
 
-import com.intership.models.Client;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.UUID;
 
 public class ClientDto {

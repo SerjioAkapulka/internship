@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.intership.services.ClientService;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

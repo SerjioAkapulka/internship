@@ -3,9 +3,29 @@ package com.intership.dto;
 import java.util.UUID;
 
 public class PenaltyDto {
+    private UUID id;
     private UUID clientId;
     private String title;
     private int cost;
+
+    public PenaltyDto(UUID id, UUID clientId, String title, int cost) {
+        this.id = id;
+        this.clientId = clientId;
+        this.title = title;
+        this.cost = cost;
+    }
+
+    public PenaltyDto() {
+
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public UUID getClientId() {
         return clientId;

@@ -3,7 +3,6 @@ package com.intership.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +14,12 @@ public class Client {
     private Integer balance;
 
     public Client() {}
+    @PrePersist
+    public void generateUUID() {
+        if(this.id == null) {
+            this.id = UUID.randomUUID();
+        }
+    }
 
     public Client(String firstName, String lastName, int balance) {
         this.firstName = firstName;
@@ -29,12 +34,7 @@ public class Client {
         this.balance = balance;
     }
 
-    @PrePersist
-    public void generateUUID() {
-        if(this.id == null) {
-            this.id = UUID.randomUUID();
-        }
-    }
+
 
     public String getFirstName() {
         return firstName;

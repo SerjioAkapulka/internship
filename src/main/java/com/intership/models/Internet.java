@@ -1,7 +1,6 @@
 package com.intership.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -11,6 +10,13 @@ public class Internet {
     private UUID clientId;
     private String title;
     private int cost;
+
+    @PrePersist
+    public void generateUUID() {
+        if(this.id == null) {
+            this.id = UUID.randomUUID();
+        }
+    }
 
     public UUID getId() {
         return id;
@@ -28,6 +34,16 @@ public class Internet {
         this.clientId = clientId;
     }
 
+    public Internet() {
+
+    }
+
+    public Internet(UUID id, UUID clientId, String title, int cost) {
+        this.id = id;
+        this.clientId = clientId;
+        this.title = title;
+        this.cost = cost;
+    }
 
     public String getTitle() {
         return title;

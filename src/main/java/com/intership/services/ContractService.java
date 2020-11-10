@@ -4,8 +4,6 @@ import com.intership.dto.ContractDto;
 import com.intership.models.Client;
 import com.intership.models.Contract;
 import com.intership.repositories.ClientRepository;
-import com.intership.repositories.ClientRepositoryImpl;
-import com.intership.repositories.ContractRepository;
 import com.intership.repositories.ContractRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +16,7 @@ import java.util.UUID;
 public class ContractService {
     @Autowired
     private ClientRepository clientRepository;
-//    @Autowired
-//    private ContractRepository contractRepository;
+
     @Autowired
     private ContractRepositoryImpl contractRepositoryImpl;
 
