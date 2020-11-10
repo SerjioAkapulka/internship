@@ -6,36 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.intership.repositories.ClientRepositoryImpl;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class ClientService {
 
     @Autowired
-    private ClientRepositoryImpl clientRepository;
+    private final ClientRepositoryImpl clientRepository;
 
     public ClientService(ClientRepositoryImpl clientRepository) {
         this.clientRepository = clientRepository;
     }
 
-
-    public void delete(Client client) {
-        clientRepository.delete(client);
-    }
-
     public Client save(Client client) {
-        return clientRepository.save(client);
+        return clientRepository.saveClient(client);
     }
 
-
-    public Iterable findAll() {
-        return clientRepository.findAll();
+    public Client getClient(UUID id) {
+        return clientRepository.getClient(id);
     }
 
     public void deleteAll() {
-        clientRepository.deleteAll();
+        clientRepository.deleteAllClients();
     }
 
-    public long count() {
-        return clientRepository.count();
+    public void delete(UUID clientId) {
+        clientRepository.deleteClient(clientId);
     }
+
+
+
 }
 

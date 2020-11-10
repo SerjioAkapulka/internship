@@ -14,7 +14,10 @@ public class Contract {
     private Client client;
     private String status;
 
+    public Contract() {}
+
     public Contract(UUID id, Client client, String status) {
+        this.id = id;
         this.client = client;
         this.status = status;
     }

@@ -1,12 +1,12 @@
 package com.intership.repositories;
 
 import com.intership.models.Client;
-import org.springframework.data.jpa.repository.Query;
+import com.intership.models.Contract;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
-public interface ClientRepository extends CrudRepository<Client, UUID> {
-
+public interface ContractRepository extends CrudRepository<Contract, UUID> {
 
 }

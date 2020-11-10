@@ -49,5 +49,19 @@
 
         </sql>
     </changeSet>
+<changeSet id="alter-tables" author="s. vagin">
+    <sql>
+        ALTER TABLE internet
+        RENAME internet_title TO title;
+        ALTER TABLE internet
+        RENAME internet_cost TO cost;
+        ALTER TABLE internet ADD id UUID;
+        ALTER TABLE internet ADD PRIMARY KEY (id);
+        ALTER TABLE mobile ADD id UUID;
+        ALTER TABLE mobile ADD PRIMARY KEY (id);
+        ALTER TABLE penalty ADD id UUID;
+        ALTER TABLE penalty ADD PRIMARY KEY (id);
+    </sql>
+</changeSet>
 
 </databaseChangeLog>

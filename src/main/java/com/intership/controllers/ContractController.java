@@ -1,18 +1,32 @@
 package com.intership.controllers;
 
 import com.intership.dto.ContractDto;
+import com.intership.models.Client;
 import com.intership.models.Contract;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.intership.services.ContractService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
-@RequestMapping(name = "contract")
 public class ContractController {
 
-    @PostMapping
+    @Autowired
+    ContractService contractService;
+
+    @PostMapping(value = "/contract/save")
     public Contract saveContract(@RequestBody ContractDto contractDto) {
-        return null;
+        return contractService.save(contractDto);
+    }
+
+    @GetMapping("/contract/get/{id}")
+    public Contract getContractById(@PathVariable UUID id) {
+        return contractService.getContract(id);
+    }
+    @DeleteMapping("/contract/{id}")
+    public void delete(@PathVariable UUID id) {
+        contractService.delete(id);
     }
 }

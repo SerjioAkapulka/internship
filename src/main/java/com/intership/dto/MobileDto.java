@@ -1,24 +1,11 @@
-package com.intership.models;
+package com.intership.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.UUID;
 
-@Entity
-public class Internet {
-    @Id
-    private UUID id;
+public class MobileDto {
     private UUID clientId;
     private String title;
     private int cost;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public UUID getClientId() {
         return clientId;
@@ -28,7 +15,6 @@ public class Internet {
         this.clientId = clientId;
     }
 
-
     public String getTitle() {
         return title;
     }
@@ -37,11 +23,11 @@ public class Internet {
         this.title = title;
     }
 
-    public int getInternetCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setInternetCost(int cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 }

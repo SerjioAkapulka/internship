@@ -3,14 +3,10 @@ package com.intership.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
-
 @Entity
-public class Internet {
+public class Penalty {
     @Id
     private UUID id;
-    private UUID clientId;
-    private String title;
-    private int cost;
 
     public UUID getId() {
         return id;
@@ -20,6 +16,10 @@ public class Internet {
         this.id = id;
     }
 
+    private UUID clientId;
+    private String title;
+    private int cost;
+
     public UUID getClientId() {
         return clientId;
     }
@@ -27,7 +27,6 @@ public class Internet {
     public void setClientId(UUID clientId) {
         this.clientId = clientId;
     }
-
 
     public String getTitle() {
         return title;
@@ -37,11 +36,11 @@ public class Internet {
         this.title = title;
     }
 
-    public int getInternetCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setInternetCost(int cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 }
