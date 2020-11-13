@@ -5,9 +5,12 @@ import com.intership.models.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.intership.repositories.ClientRepositoryImpl;
+
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ClientService {
 
     @Autowired
