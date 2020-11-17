@@ -1,10 +1,8 @@
 package com.intership;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,9 +16,6 @@ import javax.sql.DataSource;
 public class Config {
     @Configuration
     @EnableTransactionManagement
-    @PropertySource("classpath:persistence-jndi.properties")
-    @ComponentScan("org.intership")
-    @EnableJpaRepositories(basePackages = "org.intership.repositories")
     public class PersistenceJNDIConfig {
 
         @Bean
