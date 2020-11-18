@@ -2,15 +2,28 @@ package com.intership.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import java.util.UUID;
 @Entity
 public class Penalty {
     @Id
     private UUID id;
-    private UUID clientId;
+
+
+    @ManyToOne
+    private Client client;
     private String title;
     private int cost;
+    private boolean wasPayed;
+
+    public boolean isWasPayed() {
+        return wasPayed;
+    }
+
+    public void setWasPayed(boolean wasPayed) {
+        this.wasPayed = wasPayed;
+    }
 
     public UUID getId() {
         return id;
@@ -21,7 +34,7 @@ public class Penalty {
     }
 
     public Penalty() {
-
+        this.wasPayed = false;
     }
     @PrePersist
     public void generateUUID() {
@@ -29,21 +42,21 @@ public class Penalty {
             this.id = UUID.randomUUID();
         }
     }
-    public Penalty(UUID id, UUID clientId, String title, int cost) {
+    public Penalty(UUID id, Client client, String title, int cost) {
         this.id = id;
-        this.clientId = clientId;
+        this.client = client;
         this.title = title;
         this.cost = cost;
     }
 
 
 
-    public UUID getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getTitle() {

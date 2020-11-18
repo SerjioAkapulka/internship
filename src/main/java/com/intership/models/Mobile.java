@@ -2,22 +2,34 @@ package com.intership.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import java.util.UUID;
 @Entity
 public class Mobile {
     @Id
     private UUID id;
-    private UUID clientId;
+
+    @ManyToOne
+    private Client client;
     private String title;
     private int cost;
+    private boolean wasPayed;
+
+    public boolean isWasPayed() {
+        return wasPayed;
+    }
+
+    public void setWasPayed(boolean wasPayed) {
+        this.wasPayed = wasPayed;
+    }
 
     public UUID getId() {
         return id;
     }
 
     public Mobile() {
-
+        this.wasPayed = false;
     }
     @PrePersist
     public void generateUUID() {
@@ -26,9 +38,9 @@ public class Mobile {
         }
     }
 
-    public Mobile(UUID id, UUID clientId, String title, int cost) {
+    public Mobile(UUID id, Client client, String title, int cost) {
         this.id = id;
-        this.clientId = clientId;
+        this.client = client;
         this.title = title;
         this.cost = cost;
     }
@@ -37,12 +49,12 @@ public class Mobile {
         this.id = id;
     }
 
-    public UUID getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getTitle() {

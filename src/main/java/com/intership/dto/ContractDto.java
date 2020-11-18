@@ -1,8 +1,11 @@
 package com.intership.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.UUID;
 
 public class ContractDto {
+    @ApiModelProperty(value = "Идентификатор контракта")
     private UUID id;
     private UUID clientId;
     private String status;

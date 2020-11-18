@@ -1,8 +1,10 @@
 package com.intership.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +15,17 @@ public class Contract {
     @ManyToOne
     private Client client;
     private String status;
+
+    @Column(name = "date")
+    private OffsetDateTime dateTimeOfConcludeContract;
+
+    public OffsetDateTime getDateTimeOfConcludeContract() {
+        return dateTimeOfConcludeContract;
+    }
+
+    public void setDateTimeOfConcludeContract(OffsetDateTime dateTimeOfConcludeContract) {
+        this.dateTimeOfConcludeContract = dateTimeOfConcludeContract;
+    }
 
     public Contract() {}
 
