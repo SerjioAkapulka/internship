@@ -1,5 +1,7 @@
 package com.intership.models;
 
+import com.intership.exception.IncorrectInputException;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -35,10 +37,14 @@ public class Internet {
         if (this.id == null) {
             this.id = UUID.randomUUID();
         }
-
-        //Выбрасывать эксепшон
-        if (this.cost <= 0) {
-
+        if (this.cost < 0) {
+            throw new IncorrectInputException("Стоимость интернет тарифа не может быть отрицательной");
+        }
+    }
+    @PreUpdate
+    public void correctCost() {
+        if (this.cost < 0) {
+            throw new IncorrectInputException("Стоимость интернет тарифа не может быть отрицательным");
         }
     }
 

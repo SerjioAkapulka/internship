@@ -1,15 +1,8 @@
 package com.intership.exception;
 
-public class NotFoundException extends RuntimeException {
-
-    private final String message;
+public class NotFoundException extends CommonException {
 
     public NotFoundException(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+        super(message);
     }
 }

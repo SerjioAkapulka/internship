@@ -1,8 +1,11 @@
 package com.intership.models;
 
+import com.intership.exception.IncorrectInputException;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.util.UUID;
 
 @Entity
@@ -13,11 +16,23 @@ public class Client {
     private String lastName;
     private Integer balance;
 
-    public Client() {}
+    public Client() {
+    }
+
     @PrePersist
     public void generateUUID() {
-        if(this.id == null) {
+        if (this.id == null) {
             this.id = UUID.randomUUID();
+        }
+        if (this.balance < 0) {
+            throw new IncorrectInputException("Баланс клиента не может быть отрицательным");
+        }
+    }
+
+    @PreUpdate
+    public void correctBalance() {
+        if (this.balance < 0) {
+            throw new IncorrectInputException("Баланс клиента не может быть отрицательным");
         }
     }
 
@@ -33,7 +48,6 @@ public class Client {
         this.lastName = lastName;
         this.balance = balance;
     }
-
 
 
     public String getFirstName() {

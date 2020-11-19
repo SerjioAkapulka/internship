@@ -1,14 +1,17 @@
 package com.intership.dto;
 
+
+import com.intership.models.Penalty;
+
 import java.util.UUID;
 
 public class PenaltyDto {
     private UUID id;
     private UUID clientId;
-    private String title;
+    private Penalty.Title title;
     private int cost;
 
-    public PenaltyDto(UUID id, UUID clientId, String title, int cost) {
+    public PenaltyDto(UUID id, UUID clientId, Penalty.Title title, int cost) {
         this.id = id;
         this.clientId = clientId;
         this.title = title;
@@ -35,11 +38,11 @@ public class PenaltyDto {
         this.clientId = clientId;
     }
 
-    public String getTitle() {
+    public Penalty.Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Penalty.Title title) {
         this.title = title;
     }
 

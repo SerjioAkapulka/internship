@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,6 +36,7 @@ public class ContractService {
             contract.setClient(clientOptional.get());
             contract.setId(contractDto.getId());
             contract.setStatus(contractDto.getStatus());
+            contract.setDateTimeOfConcludeContract(new Date());
 
             return contractRepositoryImpl.saveContract(contract);
         } else {

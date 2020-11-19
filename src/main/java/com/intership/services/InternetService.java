@@ -44,7 +44,7 @@ public class InternetService {
         }
 
 
-        if (contractOptional.get().getStatus().equals("Active")) {
+        if (contractOptional.get().getStatus() == Contract.Status.ACTIVE) {
             Internet internet = new Internet();
             internet.setId(internetDto.getId());
             internet.setClient(clientOptional.get());
@@ -53,7 +53,7 @@ public class InternetService {
 
             return internetRepositoryImpl.saveInternet(internet);
         } else {
-            throw new ContractNotFoundException(String.format("Контракт клиента с идентификатором %s неактивен", internetDto.getClientId()));
+            throw new ContractNotFoundException(String.format("Контракт клиента с идентификатором %s неактивен или его действие приостановлено", internetDto.getClientId()));
         }
     }
 

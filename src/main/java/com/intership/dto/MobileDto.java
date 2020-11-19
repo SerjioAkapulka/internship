@@ -1,14 +1,16 @@
 package com.intership.dto;
 
+import com.intership.models.Mobile;
+
 import java.util.UUID;
 
 public class MobileDto {
     private UUID id;
     private UUID clientId;
-    private String title;
+    private Mobile.Title title;
     private int cost;
 
-    public MobileDto(UUID id, UUID clientId, String title, int cost) {
+    public MobileDto(UUID id, UUID clientId, Mobile.Title title, int cost) {
         this.id = id;
         this.clientId = clientId;
         this.title = title;
@@ -34,11 +36,11 @@ public class MobileDto {
         this.clientId = clientId;
     }
 
-    public String getTitle() {
+    public Mobile.Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Mobile.Title title) {
         this.title = title;
     }
 

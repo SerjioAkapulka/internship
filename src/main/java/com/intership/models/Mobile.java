@@ -1,9 +1,8 @@
 package com.intership.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
+import com.intership.exception.IncorrectInputException;
+
+import javax.persistence.*;
 import java.util.UUID;
 @Entity
 public class Mobile {
@@ -12,10 +11,13 @@ public class Mobile {
 
     @ManyToOne
     private Client client;
-    private String title;
+    private Title title;
     private int cost;
     private boolean wasPayed;
 
+    public enum Title {
+        Beeline, TELE2, SBERMobile
+    }
     public boolean isWasPayed() {
         return wasPayed;
     }
@@ -36,9 +38,18 @@ public class Mobile {
         if(this.id == null) {
             this.id = UUID.randomUUID();
         }
+        if (this.cost <= 0) {
+            throw new IncorrectInputException("Стоимость мобильного тарифа не может быть отрицательной");
+        }
+    }
+    @PreUpdate
+    public void correctCost() {
+        if (this.cost < 0) {
+            throw new IncorrectInputException("Стоимость мобильного тарифа не может быть отрицательным");
+        }
     }
 
-    public Mobile(UUID id, Client client, String title, int cost) {
+    public Mobile(UUID id, Client client, Title title, int cost) {
         this.id = id;
         this.client = client;
         this.title = title;
@@ -57,11 +68,11 @@ public class Mobile {
         this.client = client;
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Title title) {
         this.title = title;
     }
 

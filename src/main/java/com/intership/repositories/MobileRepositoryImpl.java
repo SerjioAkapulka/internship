@@ -18,7 +18,7 @@ public class MobileRepositoryImpl {
         if(mobileOptional.isPresent()) {
             return mobileOptional.get();
         } else {
-            throw new NoSuchElementException("Информация не найдена.");
+            throw new NoSuchElementException("Информация о мобильной связи не найдена.");
         }
     }
 

@@ -16,7 +16,7 @@ public class InternetRepositoryImpl {
         if(internetOptional.isPresent()) {
             return internetOptional.get();
         } else {
-            throw new NoSuchElementException("Информация не найдена.");
+            throw new NoSuchElementException("Информация об интернет тарифе не найдена.");
         }
     }
 

@@ -18,7 +18,7 @@ public class PenaltyRepositoryImpl {
         if(penaltyOptional.isPresent()) {
             return penaltyOptional.get();
         } else {
-            throw new NoSuchElementException("Информация не найдена.");
+            throw new NoSuchElementException("Информация о штрафах не найдена.");
         }
     }
 

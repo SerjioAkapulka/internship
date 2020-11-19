@@ -1,9 +1,10 @@
 package com.intership.exception;
 
-public class BalanceNotEnoughException extends RuntimeException {
+public class BalanceNotEnoughException extends CommonException {
     private String message;
 
+
     public BalanceNotEnoughException(String message) {
-        this.message = message;
+        super(message);
     }
 }

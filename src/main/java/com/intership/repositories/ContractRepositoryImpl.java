@@ -34,17 +34,8 @@ public class ContractRepositoryImpl {
         if(contract.isPresent()) {
             return contract.get();
         } else {
-            throw new ContractNotFoundException("Клиент не найден.");
+            throw new ContractNotFoundException("Контракт не найден.");
         }
-        /*for (Contract c : arrayList) {
-            if (id.equals(c.getClient().getId())) {
-                Optional<Contract> contractOptional = Optional.of(c);
-                return contractOptional.get();
-            } else {
-                throw new NoSuchElementException("Клиент не найден.");
-            }
-        }
-        return null;*/
     }
 
     public Contract saveContract(Contract contract) {

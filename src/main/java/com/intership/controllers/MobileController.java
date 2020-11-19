@@ -1,6 +1,7 @@
 package com.intership.controllers;
 
 import com.intership.dto.MobileDto;
+import com.intership.models.Internet;
 import com.intership.models.Mobile;
 import com.intership.services.MobileService;
 import io.swagger.annotations.ApiParam;
@@ -27,5 +28,10 @@ public class MobileController {
     @GetMapping("/mobile/{id}")
     public Mobile getMobile(@ApiParam(value = "delete mobile")@PathVariable UUID id) {
         return mobileService.getMobile(id);
+    }
+
+    @PutMapping(value = "/mobile/pay/{id}")
+    public Mobile payMobile(@ApiParam(value = "pay mobile")@PathVariable UUID id) {
+        return mobileService.pay(id);
     }
 }
