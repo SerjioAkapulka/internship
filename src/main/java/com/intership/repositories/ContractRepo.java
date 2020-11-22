@@ -1,23 +1,21 @@
 package com.intership.repositories;
 
 
+import com.intership.exception.ClientNotFoundException;
 import com.intership.exception.ContractNotFoundException;
 import com.intership.models.Contract;
 import org.springframework.stereotype.Repository;
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class ContractRepositoryImpl {
+public class ContractRepo {
 
     private final ContractRepository contractRepository;
-    private final ClientRepository clientRepository;
+    //
 
-    public ContractRepositoryImpl(ContractRepository contractRepository, ClientRepository clientRepository) {
+    public ContractRepo(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
-        this.clientRepository = clientRepository;
     }
 
     public Contract getContract(UUID id) {
@@ -25,7 +23,7 @@ public class ContractRepositoryImpl {
         if(contractOptional.isPresent()) {
             return contractOptional.get();
         } else {
-            throw new NoSuchElementException("Клиент не найден.");
+            throw new ClientNotFoundException("Клиент не найден.");
         }
     }
 

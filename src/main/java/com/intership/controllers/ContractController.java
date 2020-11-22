@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -17,16 +18,16 @@ public class ContractController {
     ContractService contractService;
 
     @PostMapping(value = "/contract")
-    public Contract saveContract(@ApiParam(value = "save contract")@RequestBody ContractDto contractDto) {
+    public Contract saveContract(@RequestBody @Valid ContractDto contractDto) {
         return contractService.save(contractDto);
     }
 
     @GetMapping("/contract/{id}")
-    public Contract getContractById(@ApiParam(value = "get contract")@PathVariable UUID id) {
+    public Contract getContractById(@PathVariable UUID id) {
         return contractService.getContract(id);
     }
     @DeleteMapping("/contract/{id}")
-    public void delete(@ApiParam(value = "delete contract")@PathVariable UUID id) {
+    public void delete(@PathVariable UUID id) {
         contractService.delete(id);
     }
 }

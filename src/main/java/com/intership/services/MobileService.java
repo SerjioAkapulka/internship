@@ -1,30 +1,26 @@
 package com.intership.services;
 
 import com.intership.dto.MobileDto;
-import com.intership.exception.BalanceNotEnoughException;
-import com.intership.exception.ClientNotFoundException;
-import com.intership.exception.ContractNotFoundException;
+import com.intership.exception.*;
 import com.intership.models.Client;
 import com.intership.models.Contract;
 import com.intership.models.Mobile;
 import com.intership.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class MobileService {
     @Autowired
-    private MobileRepositoryImpl mobileRepository;
+    private MobileRepo mobileRepository;
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
-    private ContractRepositoryImpl contractRepository;
+    private ContractRepo contractRepository;
     @Autowired
-    private ClientRepositoryImpl clientRepositoryImpl;
+    private ClientRepo clientRepo;
 
     public Mobile save(MobileDto mobileDto) {
         Optional<Client> clientOptional = clientRepository.findById(mobileDto.getClientId());
@@ -52,11 +48,14 @@ public class MobileService {
     }
     public Mobile pay(UUID id) {
         Mobile mobile = mobileRepository.getMobile(id);
+        if (mobile.isWasPayed()) {
+            throw new CommonException("Мобильный тариф уже оплачен");
+        }
         Client client = mobile.getClient();
         int total = client.getBalance() - mobile.getCost();
         if (total > 0) {
             client.setBalance(total);
-            clientRepositoryImpl.saveClient(client);
+            clientRepo.saveClient(client);
             mobile.setWasPayed(true);
             mobileRepository.saveMobile(mobile);
             return mobile;

@@ -1,14 +1,16 @@
 package com.intership.dto;
 
 import com.intership.models.Contract;
-import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class ContractDto {
-    @ApiModelProperty(value = "Идентификатор контракта")
+    @NotNull(message = "Идентификатор контракта не должен быть null")
     private UUID id;
+    @NotNull(message = "Идентификатор клиента не должен быть null")
     private UUID clientId;
+    @NotNull(message = "Статус не должен быть null")
     private Contract.Status status;
 
     public UUID getId() {

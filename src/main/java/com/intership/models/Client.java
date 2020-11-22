@@ -12,6 +12,8 @@ import java.util.UUID;
 public class Client {
     @Id
     private UUID id;
+
+
     private String firstName;
     private String lastName;
     private Integer balance;

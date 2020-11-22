@@ -2,13 +2,17 @@ package com.intership.dto;
 
 import com.intership.models.Internet;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class InternetDto {
-
+    @NotNull(message = "Идентификатор клиента не должен быть null")
     private UUID clientId;
+    @NotNull(message = "Наименование интернет-провайдера не должен быть null")
     private Internet.Title title;
+    @NotNull(message = "Стоимость не должен быть null")
     private int cost;
+    @NotNull(message = "Идентификатор интернет-провайдера не должен быть null")
     private UUID id;
 
     public InternetDto(UUID id, UUID clientId, Internet.Title title, int cost) {

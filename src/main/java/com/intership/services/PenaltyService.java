@@ -1,36 +1,32 @@
 package com.intership.services;
 
 import com.intership.dto.PenaltyDto;
-import com.intership.exception.BalanceNotEnoughException;
-import com.intership.exception.ClientNotFoundException;
-import com.intership.exception.ContractNotFoundException;
+import com.intership.exception.*;
 import com.intership.models.Client;
 import com.intership.models.Contract;
 import com.intership.models.Penalty;
 import com.intership.repositories.ClientRepository;
-import com.intership.repositories.ClientRepositoryImpl;
-import com.intership.repositories.ContractRepositoryImpl;
-import com.intership.repositories.PenaltyRepositoryImpl;
+import com.intership.repositories.ClientRepo;
+import com.intership.repositories.ContractRepo;
+import com.intership.repositories.PenaltyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class PenaltyService {
 
     @Autowired
-    private PenaltyRepositoryImpl penaltyRepository;
+    private PenaltyRepo penaltyRepository;
 
     @Autowired
     private ClientRepository clientRepository;
 
     @Autowired
-    private ContractRepositoryImpl contractRepository;
+    private ContractRepo contractRepository;
     @Autowired
-    private ClientRepositoryImpl clientRepositoryImpl;
+    private ClientRepo clientRepo;
 
     public Penalty save (PenaltyDto penaltyDto){
         Optional<Client> clientOptional = clientRepository.findById(penaltyDto.getClientId());
@@ -57,11 +53,14 @@ public class PenaltyService {
     }
     public Penalty pay(UUID id) {
         Penalty penalty = penaltyRepository.getPenalty(id);
+        if (penalty.isWasPayed()) {
+            throw new CommonException("Штраф уже оплачен");
+        }
         Client client = penalty.getClient();
         int total = client.getBalance() - penalty.getCost();
         if (total > 0) {
             client.setBalance(total);
-            clientRepositoryImpl.saveClient(client);
+            clientRepo.saveClient(client);
             penalty.setWasPayed(true);
             penaltyRepository.savePenalty(penalty);
             return penalty;

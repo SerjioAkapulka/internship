@@ -1,53 +1,63 @@
 package com.intership.services;
 
 import com.intership.dto.ContractDto;
+import com.intership.exception.ClientNotFoundException;
+import com.intership.exception.CommonException;
 import com.intership.models.Client;
 import com.intership.models.Contract;
 import com.intership.repositories.ClientRepository;
-import com.intership.repositories.ContractRepositoryImpl;
+import com.intership.repositories.ContractRepository;
+import com.intership.repositories.ContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.Date;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class ContractService {
     @Autowired
     private ClientRepository clientRepository;
-
     @Autowired
-    private ContractRepositoryImpl contractRepositoryImpl;
+    private ContractRepo contractRepo;
+    @Autowired
+    private ContractRepository contractRepository;
 
-    public ContractService(ContractRepositoryImpl contractRepository) {
-        this.contractRepositoryImpl = contractRepository;
+    public ContractService(ContractRepo contractRepository) {
+        this.contractRepo = contractRepository;
     }
 
-
     public Contract save(ContractDto contractDto) {
-        Optional<Client> clientOptional = clientRepository.findById(contractDto.getClientId());
+        Optional<Contract> contractOptional = contractRepository.findByIdAndClientId(contractDto.getId(), contractDto.getClientId());
+        Contract contract;
 
-        if(clientOptional.isPresent()) {
-            Contract contract = new Contract();
-            contract.setClient(clientOptional.get());
+
+        if (contractOptional.isPresent()) {
+            contract = contractOptional.get();
+
+            contract.setStatus(contractDto.getStatus());
+            return contractRepository.save(contract);
+        } else {
+            if(contractRepository.findById(contractDto.getId()).isPresent()) {
+                throw new CommonException("Запись с таким идентификатором контракта уже существует.");
+            }
+            contract = new Contract();
+            Client client = clientRepository.findById(contractDto.getClientId())
+                    .orElseThrow(() -> new ClientNotFoundException("Клиент с данным идентификатором не найден."));
             contract.setId(contractDto.getId());
+            contract.setClient(client);
             contract.setStatus(contractDto.getStatus());
             contract.setDateTimeOfConcludeContract(new Date());
 
-            return contractRepositoryImpl.saveContract(contract);
-        } else {
-            throw new NoSuchElementException(String.format("Клиент с идентификатором %s не найден.", contractDto.getClientId()));
+            return contractRepository.save(contract);
         }
     }
+
     public Contract getContract(UUID id) {
-        return contractRepositoryImpl.getContract(id);
+        return contractRepo.getContract(id);
     }
 
     public void delete(UUID id) {
-        contractRepositoryImpl.deleteContract(id);
+        contractRepo.deleteContract(id);
     }
 }

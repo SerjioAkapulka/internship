@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface ContractRepository extends CrudRepository<Contract, UUID> {
     @Query(value = "select * from contract where client_id = ?", nativeQuery = true)
     Optional<Contract> findByClientId(UUID clientId);
+
+    Optional<Contract> findByIdAndClientId(UUID id, UUID clientId);
 }

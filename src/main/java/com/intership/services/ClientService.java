@@ -1,22 +1,18 @@
 package com.intership.services;
 
-
 import com.intership.models.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.intership.repositories.ClientRepositoryImpl;
-
-import javax.transaction.Transactional;
+import com.intership.repositories.ClientRepo;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class ClientService {
 
     @Autowired
-    private final ClientRepositoryImpl clientRepository;
+    private final ClientRepo clientRepository;
 
-    public ClientService(ClientRepositoryImpl clientRepository) {
+    public ClientService(ClientRepo clientRepository) {
         this.clientRepository = clientRepository;
     }
 

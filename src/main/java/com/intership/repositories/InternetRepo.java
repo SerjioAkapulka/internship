@@ -1,14 +1,17 @@
 package com.intership.repositories;
 
+import com.intership.exception.NotFoundException;
 import com.intership.models.Internet;
-import java.util.NoSuchElementException;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 import java.util.UUID;
 
-public class InternetRepositoryImpl {
+@Repository
+public class InternetRepo {
     private final InternetRepository internetRepository;
 
-    public InternetRepositoryImpl(InternetRepository internetRepository)  {
+    public InternetRepo(InternetRepository internetRepository)  {
         this.internetRepository = internetRepository;
     }
     public Internet getInternet(UUID id) {
@@ -16,7 +19,7 @@ public class InternetRepositoryImpl {
         if(internetOptional.isPresent()) {
             return internetOptional.get();
         } else {
-            throw new NoSuchElementException("Информация об интернет тарифе не найдена.");
+            throw new NotFoundException("Информация об интернет тарифе не найдена.");
         }
     }
 

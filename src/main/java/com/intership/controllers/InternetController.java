@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -18,22 +19,22 @@ public class InternetController {
     InternetService internetService;
 
     @PostMapping(value = "/internet")
-    public Internet saveInternet(@ApiParam(value = "save internet")@RequestBody InternetDto internetDto) {
+    public Internet saveInternet(@RequestBody @Valid InternetDto internetDto) {
         return internetService.save(internetDto);
     }
 
     @GetMapping("/internet/{id}")
-    public Internet getInternet(@ApiParam(value = "get internet")@PathVariable UUID id) {
+    public Internet getInternet(@PathVariable UUID id) {
         return internetService.getInternet(id);
     }
 
     @PutMapping(value = "/internet/pay/{id}")
-    public Internet payInternet(@ApiParam(value = "pay internet")@PathVariable UUID id) {
+    public Internet payInternet(@PathVariable UUID id) {
         return internetService.pay(id);
     }
 
     @DeleteMapping("/internet/{id}")
-    public void delete(@ApiParam(value = "delete internet")@PathVariable UUID id) {
+    public void delete(@PathVariable UUID id) {
         internetService.delete(id);
     }
 }

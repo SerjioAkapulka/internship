@@ -10,6 +10,7 @@ public class Contract {
     private UUID id;
 
     @ManyToOne
+    @JoinColumn(updatable = false)
     private Client client;
     private Status status;
 

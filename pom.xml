@@ -79,7 +79,7 @@
     </dependencies>
 
     <build>
-        <finalName>Sberstart1</finalName>
+        <finalName>Sberstart8</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
