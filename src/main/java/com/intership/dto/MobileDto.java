@@ -1,14 +1,21 @@
 package com.intership.dto;
 
+import com.intership.models.Mobile;
+
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class MobileDto {
+    @NotNull(message = "Идентификатор мобильного оператора не должен быть null")
     private UUID id;
+    @NotNull(message = "Идентификатор клиента не должен быть null")
     private UUID clientId;
-    private String title;
+    @NotNull(message = "Наименование мобильного оператора  не должен быть null")
+    private Mobile.Title title;
+    @NotNull(message = "Стоимость не должна быть null")
     private int cost;
 
-    public MobileDto(UUID id, UUID clientId, String title, int cost) {
+    public MobileDto(UUID id, UUID clientId, Mobile.Title title, int cost) {
         this.id = id;
         this.clientId = clientId;
         this.title = title;
@@ -34,11 +41,11 @@ public class MobileDto {
         this.clientId = clientId;
     }
 
-    public String getTitle() {
+    public Mobile.Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Mobile.Title title) {
         this.title = title;
     }
 

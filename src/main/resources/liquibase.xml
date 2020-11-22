@@ -64,4 +64,13 @@
     </sql>
 </changeSet>
 
+    <changeSet id=" id=add-was-payed" author="s. vagin">
+        <sql>
+            ALTER TABLE internet ADD was_payed boolean;
+            ALTER TABLE mobile ADD was_payed boolean;
+            ALTER TABLE penalty ADD was_payed boolean;
+            ALTER TABLE contract ADD date timestamp with time zone;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

@@ -1,15 +1,19 @@
 package com.intership.dto;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class ClientDto {
+
+    @NotNull(message = "Идентификатор не должен быть null")
     private UUID id;
+    @NotNull(message = "Имя не должен быть null")
     private String firstName;
+    @NotNull(message = "Фамилия не должен быть null")
     private String lastName;
+    @NotNull(message = "Баланс не должен быть null")
     private Integer balance;
 
-    public ClientDto() {
-    }
 
     public String getFirstName() {
         return firstName;

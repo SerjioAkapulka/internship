@@ -1,5 +1,7 @@
 package com.intership.models;
 
+import com.intership.exception.IncorrectInputException;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -7,14 +9,42 @@ import java.util.UUID;
 public class Internet {
     @Id
     private UUID id;
-    private UUID clientId;
-    private String title;
+
+    @ManyToOne
+    private Client client;
+    private Title title;
     private int cost;
+    private boolean wasPayed;
+
+    public enum Title {
+        RosTeleKom, MTS, SBER
+    }
+
+    public Internet() {
+        this.wasPayed = false;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 
     @PrePersist
     public void generateUUID() {
-        if(this.id == null) {
+        if (this.id == null) {
             this.id = UUID.randomUUID();
+        }
+        if (this.cost < 0) {
+            throw new IncorrectInputException("Стоимость интернет тарифа не может быть отрицательной");
+        }
+    }
+    @PreUpdate
+    public void correctCost() {
+        if (this.cost < 0) {
+            throw new IncorrectInputException("Стоимость интернет тарифа не может быть отрицательным");
         }
     }
 
@@ -26,38 +56,34 @@ public class Internet {
         this.id = id;
     }
 
-    public UUID getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public Internet() {
-
-    }
-
-    public Internet(UUID id, UUID clientId, String title, int cost) {
+    public Internet(UUID id, Client client, Title title, int cost) {
         this.id = id;
-        this.clientId = clientId;
+        this.client = client;
         this.title = title;
         this.cost = cost;
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Title title) {
         this.title = title;
     }
 
-    public int getInternetCost() {
-        return cost;
+    public boolean isWasPayed() {
+        return wasPayed;
     }
 
-    public void setInternetCost(int cost) {
-        this.cost = cost;
+    public void setWasPayed(boolean wasPayed) {
+        this.wasPayed = wasPayed;
     }
 }

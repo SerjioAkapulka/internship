@@ -1,14 +1,22 @@
 package com.intership.dto;
 
+
+import com.intership.models.Penalty;
+
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class PenaltyDto {
+    @NotNull(message = "Идентификатор штрафа не должен быть null")
     private UUID id;
+    @NotNull(message = "Идентификатор клиента не должен быть null")
     private UUID clientId;
-    private String title;
+    @NotNull(message = "Наименование штрафа не должен быть null")
+    private Penalty.Title title;
+    @NotNull(message = "Стоимость не должна быть null")
     private int cost;
 
-    public PenaltyDto(UUID id, UUID clientId, String title, int cost) {
+    public PenaltyDto(UUID id, UUID clientId, Penalty.Title title, int cost) {
         this.id = id;
         this.clientId = clientId;
         this.title = title;
@@ -35,11 +43,11 @@ public class PenaltyDto {
         this.clientId = clientId;
     }
 
-    public String getTitle() {
+    public Penalty.Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Penalty.Title title) {
         this.title = title;
     }
 

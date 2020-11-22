@@ -1,34 +1,57 @@
 package com.intership.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import com.intership.exception.IncorrectInputException;
+
+import javax.persistence.*;
 import java.util.UUID;
 @Entity
 public class Mobile {
     @Id
     private UUID id;
-    private UUID clientId;
-    private String title;
+
+    @ManyToOne
+    private Client client;
+    private Title title;
     private int cost;
+    private boolean wasPayed;
+
+    public enum Title {
+        Beeline, TELE2, SBERMobile
+    }
+    public boolean isWasPayed() {
+        return wasPayed;
+    }
+
+    public void setWasPayed(boolean wasPayed) {
+        this.wasPayed = wasPayed;
+    }
 
     public UUID getId() {
         return id;
     }
 
     public Mobile() {
-
+        this.wasPayed = false;
     }
     @PrePersist
     public void generateUUID() {
         if(this.id == null) {
             this.id = UUID.randomUUID();
         }
+        if (this.cost <= 0) {
+            throw new IncorrectInputException("Стоимость мобильного тарифа не может быть отрицательной");
+        }
+    }
+    @PreUpdate
+    public void correctCost() {
+        if (this.cost < 0) {
+            throw new IncorrectInputException("Стоимость мобильного тарифа не может быть отрицательным");
+        }
     }
 
-    public Mobile(UUID id, UUID clientId, String title, int cost) {
+    public Mobile(UUID id, Client client, Title title, int cost) {
         this.id = id;
-        this.clientId = clientId;
+        this.client = client;
         this.title = title;
         this.cost = cost;
     }
@@ -37,19 +60,19 @@ public class Mobile {
         this.id = id;
     }
 
-    public UUID getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public String getTitle() {
+    public Title getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Title title) {
         this.title = title;
     }
 

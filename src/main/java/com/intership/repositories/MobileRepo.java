@@ -1,15 +1,18 @@
 package com.intership.repositories;
 
+import com.intership.exception.NotFoundException;
 import com.intership.models.Mobile;
+import org.springframework.stereotype.Repository;
 
-import java.util.NoSuchElementException;
+
 import java.util.Optional;
 import java.util.UUID;
 
-public class MobileRepositoryImpl {
+@Repository
+public class MobileRepo {
     private final MobileRepository mobileRepository;
 
-    public MobileRepositoryImpl(MobileRepository mobileRepository) {
+    public MobileRepo(MobileRepository mobileRepository) {
         this.mobileRepository = mobileRepository;
     }
 
@@ -18,7 +21,7 @@ public class MobileRepositoryImpl {
         if(mobileOptional.isPresent()) {
             return mobileOptional.get();
         } else {
-            throw new NoSuchElementException("Информация не найдена.");
+            throw new NotFoundException("Информация о мобильной связи не найдена.");
         }
     }
 

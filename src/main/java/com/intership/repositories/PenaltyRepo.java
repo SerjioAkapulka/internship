@@ -1,15 +1,18 @@
 package com.intership.repositories;
 
+import com.intership.exception.NotFoundException;
 import com.intership.models.Penalty;
-import java.util.NoSuchElementException;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 import java.util.UUID;
 
-public class PenaltyRepositoryImpl {
+@Repository
+public class PenaltyRepo {
 
     private final PenaltyRepository penaltyRepository;
 
-    public PenaltyRepositoryImpl(PenaltyRepository penaltyRepository) {
+    public PenaltyRepo(PenaltyRepository penaltyRepository) {
         this.penaltyRepository = penaltyRepository;
     }
 
@@ -18,7 +21,7 @@ public class PenaltyRepositoryImpl {
         if(penaltyOptional.isPresent()) {
             return penaltyOptional.get();
         } else {
-            throw new NoSuchElementException("Информация не найдена.");
+            throw new NotFoundException("Информация о штрафах не найдена.");
         }
     }
 

@@ -1,19 +1,18 @@
 package com.intership.repositories;
 
 
+import com.intership.exception.ClientNotFoundException;
 import com.intership.models.Client;
 import org.springframework.stereotype.Repository;
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class ClientRepositoryImpl {
+public class ClientRepo {
 
     private final ClientRepository clientRepository;
 
-    public ClientRepositoryImpl(ClientRepository clientRepository) {
+    public ClientRepo(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 
@@ -27,7 +26,7 @@ public class ClientRepositoryImpl {
         if(clientOptional.isPresent()) {
             return clientOptional.get();
         } else {
-            throw new NoSuchElementException("Клиент не найден.");
+            throw new ClientNotFoundException("Клиент не найден.");
         }
     }
 

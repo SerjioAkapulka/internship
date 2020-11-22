@@ -1,17 +1,13 @@
 package com.intership;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import sun.tools.java.Environment;
 
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
@@ -20,13 +16,7 @@ import javax.sql.DataSource;
 public class Config {
     @Configuration
     @EnableTransactionManagement
-    @PropertySource("classpath:persistence-jndi.properties")
-    @ComponentScan("org.baeldung.persistence")
-    @EnableJpaRepositories(basePackages = "org.baeldung.persistence.dao")
     public class PersistenceJNDIConfig {
-
-        @Autowired
-        private Environment env;
 
         @Bean
         public LocalContainerEntityManagerFactoryBean entityManagerFactory()

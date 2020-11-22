@@ -1,8 +1,7 @@
 package com.intership.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -11,22 +10,40 @@ public class Contract {
     private UUID id;
 
     @ManyToOne
+    @JoinColumn(updatable = false)
     private Client client;
-    private String status;
+    private Status status;
+
+    public enum Status {
+        ACTIVE,FROZEN,EXPIRED
+    }
+
+    @Column(name = "date")
+    private Date dateTimeOfConcludeContract;
+
+    public Date getDateTimeOfConcludeContract() {
+        return dateTimeOfConcludeContract;
+    }
+
+
+
+    public void setDateTimeOfConcludeContract(Date dateTimeOfConcludeContract) {
+        this.dateTimeOfConcludeContract = dateTimeOfConcludeContract;
+    }
 
     public Contract() {}
 
-    public Contract(UUID id, Client client, String status) {
+    public Contract(UUID id, Client client, Status status) {
         this.id = id;
         this.client = client;
         this.status = status;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
