@@ -1,7 +1,6 @@
 package com.intership.controllers;
 
 import com.intership.dto.PenaltyDto;
-import com.intership.models.Mobile;
 import com.intership.models.Penalty;
 import com.intership.services.PenaltyService;
 import io.swagger.annotations.ApiParam;
